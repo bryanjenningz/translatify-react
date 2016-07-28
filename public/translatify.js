@@ -161,15 +161,24 @@ var App = React.createClass({
   }
 });
 
-var rootEl = document.querySelector('#root');
-var text = rootEl.textContent;
-var state = {
-  translations: translateText(dictionaries, text),
-  wordList: Object.keys(dictionaries[0]).slice(0, 2)
-};
+function init() {
+  var rootEl = document.querySelector('#root');
+  var text = rootEl.textContent;
+
+  var state = {
+    text: text,
+    translations: translateText(dictionaries, text),
+    wordList: Object.keys(dictionaries[0]).slice(0, 2),
+    rootEl: rootEl
+  };
+
+  getWords();
+
+  return state;
+}
 
 function render() {
-  ReactDOM.render(<App state={state} /> , rootEl);
+  ReactDOM.render(<App state={state} /> , state.rootEl);
 }
 
 function getWords() {
@@ -188,4 +197,4 @@ function getWords() {
   });
 }
 
-getWords();
+var state = init();
