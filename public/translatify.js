@@ -79,6 +79,7 @@ var FormatTranslation = React.createClass({
     } else {
       console.log('Make sure you pass in either a {word, pronunciation, meaning} object or a string.',
         'You passed in: ', JSON.stringify(translation));
+      return <span></span>;
     }
   }
 });
@@ -108,6 +109,7 @@ var WordTable = React.createClass({
       );
     } else {
       console.log('There are currently no words in the word table');
+      return <table></table>;
     }
   }
 });
@@ -140,6 +142,7 @@ var WordTableEntry = React.createClass({
       );
     } else {
       console.log('No translation for word table entry: ' + this.props.word);
+      return <tr></tr>;
     }
   }
 });
@@ -174,7 +177,7 @@ function getWords() {
     url: '/api/words/',
     method: 'GET',
     success: function(wordList) {
-      if (wordList.length) {
+      if (wordList) {
         state.wordList = wordList;
       }
       render();
